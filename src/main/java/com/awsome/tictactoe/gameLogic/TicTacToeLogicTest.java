@@ -26,6 +26,13 @@ public class TicTacToeLogicTest {
     }
 
     @Test
+    public void getGameStatusShouldReturnInProgressWhenBoardEmpty() {
+        Board board = new Board();
+        TicTacToeLogic logic = new TicTacToeLogic(board);
+        Assert.assertEquals(GameStatus.InProgress,logic.getGameStatus());
+    }
+
+    @Test
     public void getGameStatusShouldReturnPlayer2WonWhenHas3FieldsLeftDiagonal() {
         Board board = new Board();
         FieldStatus[][] gameBoard = board.getBoard();

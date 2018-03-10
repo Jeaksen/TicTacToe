@@ -11,13 +11,13 @@ public class TicTacToeLogic {
     public GameStatus getGameStatus(){
         FieldStatus[][] gameBoard = this.gameBoard.getBoard();
 
-        if(gameBoard[0][0] == gameBoard[1][1] && gameBoard[1][1] == gameBoard[2][2]){
+        if(gameBoard[0][0] == gameBoard[1][1] && gameBoard[1][1] == gameBoard[2][2]  && gameBoard[2][2] != FieldStatus.Empty){
             if (gameBoard[0][0] == FieldStatus.TakenByPlayer1){
                 return GameStatus.Player1Won;
             } else return GameStatus.Player2Won;
         }
 
-        if(gameBoard[2][0] == gameBoard[1][1] && gameBoard[1][1] == gameBoard[0][2]){
+        if(gameBoard[2][0] == gameBoard[1][1] && gameBoard[1][1] == gameBoard[0][2] && gameBoard[0][2] != FieldStatus.Empty){
             if (gameBoard[2][0] == FieldStatus.TakenByPlayer1){
                 return GameStatus.Player1Won;
             } else return GameStatus.Player2Won;
