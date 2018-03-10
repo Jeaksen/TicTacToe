@@ -1,11 +1,17 @@
 package com.awsome.tictactoe.gameLogic;
 
+import java.awt.*;
+
 public class TicTacToeLogic {
 
     private Board gameBoard;
+    private IPlayer player1;
+    private IPlayer player2;
 
-    public TicTacToeLogic(Board gameBoard) {
+    public TicTacToeLogic(Board gameBoard, IPlayer player1, IPlayer player2) {
         this.gameBoard = gameBoard;
+        this.player1 = player1;
+        this.player2 = player2;
     }
 
     public GameStatus getGameStatus(){
@@ -49,4 +55,23 @@ public class TicTacToeLogic {
         return GameStatus.Tie;
     }
 
+    public void runGame(){
+        IPlayer currentPlayer = player1;
+        while (this.getGameStatus() == GameStatus.InProgress){
+            Point chosenPoint =  currentPlayer.makeMove(this.gameBoard);
+            if (currentPlayer == player1){
+                FieldStatus chosenField = FieldStatus.TakenByPlayer1;
+                gameBoard.getBoard()[chosenPoint.x][chosenPoint.y] = chosenField;
+            } else {
+                FieldStatus chosenField = FieldStatus.TakenByPlayer2;
+                gameBoard.getBoard()[chosenPoint.x][chosenPoint.y] = chosenField;
+            }
+            if(currentPlayer == player1){
+                currentPlayer = player2;
+            } else {
+                currentPlayer = player1;
+            }
+
+        }
+    }
 }

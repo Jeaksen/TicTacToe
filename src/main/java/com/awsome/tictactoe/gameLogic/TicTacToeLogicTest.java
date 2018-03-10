@@ -21,14 +21,14 @@ public class TicTacToeLogicTest {
         gameBoard[0][0]=FieldStatus.TakenByPlayer1;
         gameBoard[1][1]=FieldStatus.TakenByPlayer1;
         gameBoard[2][2]=FieldStatus.TakenByPlayer1;
-        TicTacToeLogic logic = new TicTacToeLogic(board);
+        TicTacToeLogic logic = new TicTacToeLogic(board, null, null);
         Assert.assertEquals(GameStatus.Player1Won,logic.getGameStatus());
     }
 
     @Test
     public void getGameStatusShouldReturnInProgressWhenBoardEmpty() {
         Board board = new Board();
-        TicTacToeLogic logic = new TicTacToeLogic(board);
+        TicTacToeLogic logic = new TicTacToeLogic(board, null, null);
         Assert.assertEquals(GameStatus.InProgress,logic.getGameStatus());
     }
 
@@ -39,7 +39,7 @@ public class TicTacToeLogicTest {
         gameBoard[0][0]=FieldStatus.TakenByPlayer2;
         gameBoard[1][1]=FieldStatus.TakenByPlayer2;
         gameBoard[2][2]=FieldStatus.TakenByPlayer2;
-        TicTacToeLogic logic = new TicTacToeLogic(board);
+        TicTacToeLogic logic = new TicTacToeLogic(board, null, null);
         Assert.assertEquals(GameStatus.Player2Won,logic.getGameStatus());
     }
 
@@ -50,7 +50,7 @@ public class TicTacToeLogicTest {
         gameBoard[2][0]=FieldStatus.TakenByPlayer1;
         gameBoard[1][1]=FieldStatus.TakenByPlayer1;
         gameBoard[0][2]=FieldStatus.TakenByPlayer1;
-        TicTacToeLogic logic = new TicTacToeLogic(board);
+        TicTacToeLogic logic = new TicTacToeLogic(board,null, null);
         Assert.assertEquals(GameStatus.Player1Won,logic.getGameStatus());
     }
 
@@ -61,7 +61,7 @@ public class TicTacToeLogicTest {
         gameBoard[2][0]=FieldStatus.TakenByPlayer2;
         gameBoard[1][1]=FieldStatus.TakenByPlayer2;
         gameBoard[0][2]=FieldStatus.TakenByPlayer2;
-        TicTacToeLogic logic = new TicTacToeLogic(board);
+        TicTacToeLogic logic = new TicTacToeLogic(board,null, null);
         Assert.assertEquals(GameStatus.Player2Won,logic.getGameStatus());
     }
 
@@ -72,7 +72,7 @@ public class TicTacToeLogicTest {
         gameBoard[0][0]=FieldStatus.TakenByPlayer2;
         gameBoard[1][0]=FieldStatus.TakenByPlayer2;
         gameBoard[2][0]=FieldStatus.TakenByPlayer2;
-        TicTacToeLogic logic = new TicTacToeLogic(board);
+        TicTacToeLogic logic = new TicTacToeLogic(board,null, null);
         Assert.assertEquals(GameStatus.Player2Won,logic.getGameStatus());
     }
 
@@ -83,7 +83,7 @@ public class TicTacToeLogicTest {
         gameBoard[0][1]=FieldStatus.TakenByPlayer2;
         gameBoard[1][1]=FieldStatus.TakenByPlayer2;
         gameBoard[2][1]=FieldStatus.TakenByPlayer2;
-        TicTacToeLogic logic = new TicTacToeLogic(board);
+        TicTacToeLogic logic = new TicTacToeLogic(board,null, null);
         Assert.assertEquals(GameStatus.Player2Won,logic.getGameStatus());
     }
 
@@ -94,7 +94,7 @@ public class TicTacToeLogicTest {
         gameBoard[0][0]=FieldStatus.TakenByPlayer2;
         gameBoard[0][1]=FieldStatus.TakenByPlayer2;
         gameBoard[0][2]=FieldStatus.TakenByPlayer2;
-        TicTacToeLogic logic = new TicTacToeLogic(board);
+        TicTacToeLogic logic = new TicTacToeLogic(board,null, null);
         Assert.assertEquals(GameStatus.Player2Won,logic.getGameStatus());
     }
 
@@ -105,7 +105,7 @@ public class TicTacToeLogicTest {
         gameBoard[1][0]=FieldStatus.TakenByPlayer2;
         gameBoard[1][1]=FieldStatus.TakenByPlayer2;
         gameBoard[1][2]=FieldStatus.TakenByPlayer2;
-        TicTacToeLogic logic = new TicTacToeLogic(board);
+        TicTacToeLogic logic = new TicTacToeLogic(board,null, null);
         Assert.assertEquals(GameStatus.Player2Won,logic.getGameStatus());
     }
 
@@ -123,7 +123,17 @@ public class TicTacToeLogicTest {
         gameBoard[2][1]=FieldStatus.TakenByPlayer2;
         gameBoard[2][2]=FieldStatus.TakenByPlayer1;
 
-        TicTacToeLogic logic = new TicTacToeLogic(board);
+        TicTacToeLogic logic = new TicTacToeLogic(board,null, null);
         Assert.assertEquals(GameStatus.Tie,logic.getGameStatus());
+    }
+
+    @Test
+    public void runGameForRandomPlayers(){
+        IPlayer player1 = new RandomAIPlayer();
+        IPlayer player2 = new RandomAIPlayer();
+        Board board = new Board();
+        TicTacToeLogic gameLogic = new TicTacToeLogic(board, player1, player2);
+        gameLogic.runGame();
+
     }
 }
