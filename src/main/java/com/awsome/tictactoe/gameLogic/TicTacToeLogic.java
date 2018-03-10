@@ -38,8 +38,15 @@ public class TicTacToeLogic {
                 } else return GameStatus.Player1Won;
             }
         }
-        return GameStatus.InProgress;
 
+        for (int i = 0; i < gameBoard.length; i++) {
+            for (int j = 0; j < gameBoard.length; j++) {
+                if (gameBoard[i][j] == FieldStatus.Empty){
+                    return GameStatus.InProgress;
+                }
+            }
+        }
+        return GameStatus.Tie;
     }
 
 }
