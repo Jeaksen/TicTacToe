@@ -7,11 +7,13 @@ public class TicTacToeLogic {
     private Board gameBoard;
     private IPlayer player1;
     private IPlayer player2;
+    private IStatisticsRepository statisticsRepository;
 
-    public TicTacToeLogic(Board gameBoard, IPlayer player1, IPlayer player2) {
+    public TicTacToeLogic(Board gameBoard, IPlayer player1, IPlayer player2, IStatisticsRepository statisticsRepository) {
         this.gameBoard = gameBoard;
         this.player1 = player1;
         this.player2 = player2;
+        this.statisticsRepository = statisticsRepository;
     }
 
     public GameStatus getGameStatus(){
@@ -71,7 +73,16 @@ public class TicTacToeLogic {
             } else {
                 currentPlayer = player1;
             }
-
+        }
+        if (this.getGameStatus() == GameStatus.Tie){
+            statisticsRepository.saveResult(player1.getName(), PlayerResultStatus.Tie);
+            statisticsRepository.saveResult(player2.getName(), PlayerResultStatus.Tie);
+        } if(this.getGameStatus() == GameStatus.Player1Won){
+            statisticsRepository.saveResult(player1.getName(), PlayerResultStatus.Won);
+            statisticsRepository.saveResult(player2.getName(), PlayerResultStatus.Lost);
+        } else {
+            statisticsRepository.saveResult(player2.getName(), PlayerResultStatus.Won);
+            statisticsRepository.saveResult(player1.getName(), PlayerResultStatus.Lost);
         }
     }
 }
