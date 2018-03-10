@@ -35,4 +35,26 @@ public class TicTacToeLogicTest {
         TicTacToeLogic logic = new TicTacToeLogic(board);
         Assert.assertEquals(GameStatus.Player2Won,logic.getGameStatus());
     }
+
+    @Test
+    public void getGameStatusShouldReturnPlayer1WonWhenHas3FieldsRightDiagonal() {
+        Board board = new Board();
+        FieldStatus[][] gameBoard = board.getBoard();
+        gameBoard[2][0]=FieldStatus.TakenByPlayer1;
+        gameBoard[1][1]=FieldStatus.TakenByPlayer1;
+        gameBoard[0][2]=FieldStatus.TakenByPlayer1;
+        TicTacToeLogic logic = new TicTacToeLogic(board);
+        Assert.assertEquals(GameStatus.Player1Won,logic.getGameStatus());
+    }
+
+    @Test
+    public void getGameStatusShouldReturnPlayer2WonWhenHas3FieldsRightDiagonal() {
+        Board board = new Board();
+        FieldStatus[][] gameBoard = board.getBoard();
+        gameBoard[2][0]=FieldStatus.TakenByPlayer2;
+        gameBoard[1][1]=FieldStatus.TakenByPlayer2;
+        gameBoard[0][2]=FieldStatus.TakenByPlayer2;
+        TicTacToeLogic logic = new TicTacToeLogic(board);
+        Assert.assertEquals(GameStatus.Player2Won,logic.getGameStatus());
+    }
 }
