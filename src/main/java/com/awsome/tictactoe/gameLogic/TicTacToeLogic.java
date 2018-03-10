@@ -23,6 +23,21 @@ public class TicTacToeLogic {
             } else return GameStatus.Player2Won;
         }
 
+        for (int i = 0; i < gameBoard.length; i++) {
+            if (gameBoard[0][i] == gameBoard[1][i] && gameBoard[1][i] == gameBoard[2][i] && gameBoard[2][i] != FieldStatus.Empty) {
+                if (gameBoard[1][i] == FieldStatus.TakenByPlayer2) {
+                    return GameStatus.Player2Won;
+                } else return GameStatus.Player1Won;
+            }
+        }
+
+        for (int i = 0; i < gameBoard.length; i++) {
+            if (gameBoard[i][0] == gameBoard[i][1] && gameBoard[i][1] == gameBoard[i][2] && gameBoard[i][2] != FieldStatus.Empty) {
+                if (gameBoard[i][1] == FieldStatus.TakenByPlayer2) {
+                    return GameStatus.Player2Won;
+                } else return GameStatus.Player1Won;
+            }
+        }
         return GameStatus.InProgress;
 
     }

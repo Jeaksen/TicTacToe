@@ -57,4 +57,48 @@ public class TicTacToeLogicTest {
         TicTacToeLogic logic = new TicTacToeLogic(board);
         Assert.assertEquals(GameStatus.Player2Won,logic.getGameStatus());
     }
+
+    @Test
+    public void getGameStatusShouldReturnPlayer2WonWhenHas3FieldsColumn1() {
+        Board board = new Board();
+        FieldStatus[][] gameBoard = board.getBoard();
+        gameBoard[0][0]=FieldStatus.TakenByPlayer2;
+        gameBoard[1][0]=FieldStatus.TakenByPlayer2;
+        gameBoard[2][0]=FieldStatus.TakenByPlayer2;
+        TicTacToeLogic logic = new TicTacToeLogic(board);
+        Assert.assertEquals(GameStatus.Player2Won,logic.getGameStatus());
+    }
+
+    @Test
+    public void getGameStatusShouldReturnPlayer2WonWhenHas3FieldsColumn2() {
+        Board board = new Board();
+        FieldStatus[][] gameBoard = board.getBoard();
+        gameBoard[0][1]=FieldStatus.TakenByPlayer2;
+        gameBoard[1][1]=FieldStatus.TakenByPlayer2;
+        gameBoard[2][1]=FieldStatus.TakenByPlayer2;
+        TicTacToeLogic logic = new TicTacToeLogic(board);
+        Assert.assertEquals(GameStatus.Player2Won,logic.getGameStatus());
+    }
+
+    @Test
+    public void getGameStatusShouldReturnPlayer2WonWhenHas3FieldsRow1() {
+        Board board = new Board();
+        FieldStatus[][] gameBoard = board.getBoard();
+        gameBoard[0][0]=FieldStatus.TakenByPlayer2;
+        gameBoard[0][1]=FieldStatus.TakenByPlayer2;
+        gameBoard[0][2]=FieldStatus.TakenByPlayer2;
+        TicTacToeLogic logic = new TicTacToeLogic(board);
+        Assert.assertEquals(GameStatus.Player2Won,logic.getGameStatus());
+    }
+
+    @Test
+    public void getGameStatusShouldReturnPlayer2WonWhenHas3FieldsRow2() {
+        Board board = new Board();
+        FieldStatus[][] gameBoard = board.getBoard();
+        gameBoard[1][0]=FieldStatus.TakenByPlayer2;
+        gameBoard[1][1]=FieldStatus.TakenByPlayer2;
+        gameBoard[1][2]=FieldStatus.TakenByPlayer2;
+        TicTacToeLogic logic = new TicTacToeLogic(board);
+        Assert.assertEquals(GameStatus.Player2Won,logic.getGameStatus());
+    }
 }
