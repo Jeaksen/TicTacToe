@@ -9,7 +9,14 @@ public class TicTacToeLogic {
     }
 
     public GameStatus getGameStatus(){
-        return GameStatus.Player1Won;
+        FieldStatus[][] gameBoard = this.gameBoard.getBoard();
+        if (gameBoard[0][0] == FieldStatus.TakenByPlayer1 &&
+        gameBoard[1][1]== FieldStatus.TakenByPlayer1 &&
+        gameBoard[2][2] == FieldStatus.TakenByPlayer1 ){
+            return GameStatus.Player1Won;
+        } else {
+            return GameStatus.Player2Won;
+        }
     }
 
 }
