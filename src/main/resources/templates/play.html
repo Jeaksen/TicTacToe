@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <title>Play</title>
+    <link type="text/css" rel="stylesheet" href="style.css" />
 </head>
 <body>
-<h1>Play</h1>
+<div>
+    <div th:class="${classes[0][0]}"></div>
+    <div th:class="${classes[0][1]}"></div>
+    <div th:class="${classes[0][2]}"></div>
+</div>
+<div>
+    <div th:class="${classes[1][0]}"></div>
+    <div th:class="${classes[1][1]}"></div>
+    <div th:class="${classes[1][2]}"></div>
+</div>
+<div>
+    <div th:class="${classes[2][0]}"></div>
+    <div th:class="${classes[2][1]}"></div>
+    <div th:class="${classes[2][2]}"></div>
+</div>
 </body>
 </html>

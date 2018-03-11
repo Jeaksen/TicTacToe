@@ -3,7 +3,8 @@ package com.awsome.tictactoe.gameLogic;
 public class Board {
 
     private FieldStatus[][] board;
-    private final int size = 3;
+    public static final int size = 3;
+
 
     public Board() {
         this.board = new FieldStatus[size][size];

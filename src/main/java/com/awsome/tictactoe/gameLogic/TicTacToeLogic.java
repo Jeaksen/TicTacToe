@@ -12,7 +12,8 @@ public class TicTacToeLogic {
     private IStatisticsRepository statisticsRepository;
     private IView view;
 
-    public TicTacToeLogic(Board gameBoard, IPlayer player1, IPlayer player2, IStatisticsRepository statisticsRepository, IView view) {
+    public TicTacToeLogic(Board gameBoard, IPlayer player1, IPlayer player2,
+                          IStatisticsRepository statisticsRepository, IView view) {
         this.gameBoard = gameBoard;
         this.player1 = player1;
         this.player2 = player2;
