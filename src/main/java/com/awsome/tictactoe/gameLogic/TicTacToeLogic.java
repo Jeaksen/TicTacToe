@@ -1,5 +1,7 @@
 package com.awsome.tictactoe.gameLogic;
 
+import com.awsome.tictactoe.view.IView;
+
 import java.awt.*;
 
 public class TicTacToeLogic {
@@ -8,12 +10,14 @@ public class TicTacToeLogic {
     private IPlayer player1;
     private IPlayer player2;
     private IStatisticsRepository statisticsRepository;
+    private IView view;
 
-    public TicTacToeLogic(Board gameBoard, IPlayer player1, IPlayer player2, IStatisticsRepository statisticsRepository) {
+    public TicTacToeLogic(Board gameBoard, IPlayer player1, IPlayer player2, IStatisticsRepository statisticsRepository, IView view) {
         this.gameBoard = gameBoard;
         this.player1 = player1;
         this.player2 = player2;
         this.statisticsRepository = statisticsRepository;
+        this.view = view;
     }
 
     public GameStatus getGameStatus(){
@@ -73,6 +77,7 @@ public class TicTacToeLogic {
             } else {
                 currentPlayer = player1;
             }
+            this.view.updateView(currentPlayer, gameBoard);
         }
         if (this.getGameStatus() == GameStatus.Tie){
             statisticsRepository.saveResult(player1.getName(), PlayerResultStatus.Tie);

@@ -5,7 +5,11 @@ import java.util.Random;
 
 public class RandomAIPlayer implements IPlayer {
 
-    private String name = "Dummie";
+    private String name;
+
+    public RandomAIPlayer(String name) {
+        this.name = name;
+    }
 
     @Override
     public Point makeMove(Board board) {
