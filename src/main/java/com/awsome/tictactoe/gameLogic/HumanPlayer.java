@@ -23,4 +23,9 @@ public class HumanPlayer implements IPlayer {
     public String getName() {
         return name;
     }
+
+    @Override
+    public boolean shouldWait(){
+        return true;
+    }
 }

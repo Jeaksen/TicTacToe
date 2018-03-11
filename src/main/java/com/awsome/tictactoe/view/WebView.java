@@ -7,9 +7,10 @@ import java.awt.*;
 
 public class WebView implements IView {
 
-    String[][] boardClasses = new String[Board.size][Board.size];
+    String[][] boardClasses;
 
     public WebView() {
+        boardClasses = new String[Board.size][Board.size];
         for (int i = 0; i < Board.size; i++) {
             for (int j = 0; j < Board.size; j++) {
                 boardClasses[i][j] = "empty_field";

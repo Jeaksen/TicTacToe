@@ -11,6 +11,8 @@ public class TicTacToeLogic {
     private IPlayer player2;
     private IStatisticsRepository statisticsRepository;
     private IView view;
+    private IPlayer currentPlayer;
+
 
     public TicTacToeLogic(Board gameBoard, IPlayer player1, IPlayer player2,
                           IStatisticsRepository statisticsRepository, IView view) {
@@ -19,6 +21,7 @@ public class TicTacToeLogic {
         this.player2 = player2;
         this.statisticsRepository = statisticsRepository;
         this.view = view;
+        this.currentPlayer = player1;
     }
 
     public GameStatus getGameStatus(){
@@ -67,6 +70,10 @@ public class TicTacToeLogic {
         Point chosenPoint;
         while (this.getGameStatus() == GameStatus.InProgress){
             chosenPoint = currentPlayer.makeMove(this.gameBoard);
+            if (chosenPoint == null){
+                this.view.updateView(currentPlayer, gameBoard);
+                return;
+            }
             while (gameBoard.getBoard()[chosenPoint.x][chosenPoint.y] != FieldStatus.Empty){
                 this.view.displayMessage("This field is already taken, please retry");
                 chosenPoint =  currentPlayer.makeMove(this.gameBoard);
@@ -85,6 +92,9 @@ public class TicTacToeLogic {
             }
             this.view.updateView(currentPlayer, gameBoard);
         }
+    }
+
+    private void saveStatistics(){
         if (this.getGameStatus() == GameStatus.Tie){
             statisticsRepository.saveResult(player1.getName(), PlayerResultStatus.Tie);
             statisticsRepository.saveResult(player2.getName(), PlayerResultStatus.Tie);
@@ -95,5 +105,22 @@ public class TicTacToeLogic {
             statisticsRepository.saveResult(player2.getName(), PlayerResultStatus.Won);
             statisticsRepository.saveResult(player1.getName(), PlayerResultStatus.Lost);
         }
+    }
+
+    public GameStatus runStep(Point point){
+        FieldStatus chosenField = currentPlayer == player1?FieldStatus.TakenByPlayer1:FieldStatus.TakenByPlayer2;
+        gameBoard.getBoard()[point.x][point.y] = chosenField;
+        currentPlayer = currentPlayer == player1?player2:player1;
+        this.view.updateView(this.currentPlayer, this.gameBoard);
+        if (this.getGameStatus() != GameStatus.InProgress) {this.saveStatistics();}
+        return this.getGameStatus();
+    }
+
+    public IPlayer getCurrentPlayer() {
+        return this.currentPlayer;
+    }
+
+    public void setCurrentPlayer(IPlayer currentPlayer){
+        this.currentPlayer = currentPlayer;
     }
 }

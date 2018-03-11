@@ -6,4 +6,5 @@ public interface IPlayer {
 
     Point makeMove(Board board);
     String getName();
+    boolean shouldWait();
 }
