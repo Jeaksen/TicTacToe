@@ -63,8 +63,13 @@ public class TicTacToeLogic {
 
     public void runGame(){
         IPlayer currentPlayer = player1;
+        Point chosenPoint;
         while (this.getGameStatus() == GameStatus.InProgress){
-            Point chosenPoint =  currentPlayer.makeMove(this.gameBoard);
+            chosenPoint = currentPlayer.makeMove(this.gameBoard);
+            while (gameBoard.getBoard()[chosenPoint.x][chosenPoint.y] != FieldStatus.Empty){
+                this.view.displayMessage("This field is already taken, please retry");
+                chosenPoint =  currentPlayer.makeMove(this.gameBoard);
+            }
             if (currentPlayer == player1){
                 FieldStatus chosenField = FieldStatus.TakenByPlayer1;
                 gameBoard.getBoard()[chosenPoint.x][chosenPoint.y] = chosenField;

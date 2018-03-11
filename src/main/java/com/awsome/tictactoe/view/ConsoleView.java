@@ -5,6 +5,7 @@ import com.awsome.tictactoe.gameLogic.FieldStatus;
 import com.awsome.tictactoe.gameLogic.IPlayer;
 
 import java.awt.*;
+import java.util.Scanner;
 
 public class ConsoleView implements IView {
     @Override
@@ -22,13 +23,38 @@ public class ConsoleView implements IView {
                         System.out.print(" ");
                     }
                 }
+                if (j<2) System.out.print("|");
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     @Override
     public Point promptForNewMove() {
-        return null;
+        int x,y;
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.println("Choose your field");
+            try {
+                System.out.println("Row: ");
+                x = Integer.parseInt(sc.nextLine()) - 1;
+                if (x > 2 || x < 0) throw new Exception();
+                System.out.print("Column: ");
+                y = Integer.parseInt(sc.nextLine()) - 1;
+                if (y > 2 || y < 0) throw new Exception();
+                break;
+            } catch (Exception e){
+                System.out.println("Not valid input, enter number from 1-3");
+                continue;
+            }
+        }
+
+        return new Point(x,y);
+    }
+
+    @Override
+    public void displayMessage(String message) {
+        System.out.println(message);
     }
 }

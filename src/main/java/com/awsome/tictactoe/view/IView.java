@@ -10,4 +10,6 @@ public interface IView {
     void updateView(IPlayer currentPlayer, Board board);
 
     Point promptForNewMove();
+
+    void displayMessage(String message);
 }

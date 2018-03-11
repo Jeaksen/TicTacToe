@@ -129,12 +129,12 @@ public class TicTacToeLogicTest {
 
     @Test
     public void runGameForRandomPlayers(){
-        IPlayer player1 = new RandomAIPlayer("AI_1");
-        IPlayer player2 = new RandomAIPlayer("AI_2");
-        Board board = new Board();
-        ConsoleStatisticsRepository consoleStatisticsRepository  = new ConsoleStatisticsRepository();
+        IStatisticsRepository statsRepo  = new ConsoleStatisticsRepository();
         IView view = new ConsoleView();
-        TicTacToeLogic gameLogic = new TicTacToeLogic(board, player1, player2, consoleStatisticsRepository, view );
+        IPlayer player1 = new RandomAIPlayer("AI_1");
+        IPlayer player2 = new HumanPlayer(view, "Bob");
+        Board board = new Board();
+        TicTacToeLogic gameLogic = new TicTacToeLogic(board, player1, player2, statsRepo, view );
         gameLogic.runGame();
 
     }
