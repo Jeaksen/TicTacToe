@@ -2,12 +2,12 @@
     margin: 0;
     padding: 0;
     background: black;
+    color: white;
 }
 
 div{
     min-height: 50px;
     min-width: 50px;
-
 }
 div div{
     display: inline-block;

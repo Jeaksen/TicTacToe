@@ -98,7 +98,7 @@ public class TicTacToeLogic {
         if (this.getGameStatus() == GameStatus.Tie){
             statisticsRepository.saveResult(player1.getName(), PlayerResultStatus.Tie);
             statisticsRepository.saveResult(player2.getName(), PlayerResultStatus.Tie);
-        } if(this.getGameStatus() == GameStatus.Player1Won){
+        } else if(this.getGameStatus() == GameStatus.Player1Won){
             statisticsRepository.saveResult(player1.getName(), PlayerResultStatus.Won);
             statisticsRepository.saveResult(player2.getName(), PlayerResultStatus.Lost);
         } else {

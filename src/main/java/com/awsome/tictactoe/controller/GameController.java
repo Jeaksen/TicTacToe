@@ -2,9 +2,8 @@ package com.awsome.tictactoe.controller;
 
 import com.awsome.tictactoe.gameLogic.*;
 import com.awsome.tictactoe.model.User;
-import com.awsome.tictactoe.repositories.ConsoleUsersRepository;
-import com.awsome.tictactoe.repositories.IUsersRepository;
-import com.awsome.tictactoe.view.IView;
+import com.awsome.tictactoe.repository.ConsoleUsersRepository;
+import com.awsome.tictactoe.repository.IUsersRepository;
 import com.awsome.tictactoe.view.WebView;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,8 +52,8 @@ public class GameController {
     @GetMapping("/play")
     public String play(Model model){
         model.addAttribute("classes", this.view.getBoardClasses());
-        if (this.gameLogic.getGameStatus() == GameStatus.InProgress){
-            
+        if (this.gameLogic.getGameStatus() != GameStatus.InProgress){
+            model.addAttribute("game_finished", true);
         }
         return "play";
     }

@@ -9,41 +9,42 @@
             crossorigin="anonymous"></script>
 
     <link type="text/css" rel="stylesheet" href="style.css" />
-    <script>
-        var clickOnfield = function ( e, x, y)
-        {
+    <script th:inline="javascript">
+        var finish_game = [[${game_finished}]];
+        var clickOnField = function ( e, x, y) {
             $('div').removeClass('wrongField');
-            if(e.className === 'empty_field')
-            {
-                $('#warnings').hide(2400);
-                location.href='/move?x='+x+'&y='+y;
-            }
-            else
-            {
-                $('#warnings').show(2400);
-                $(e).addClass('wrongField');
+            if (finish_game !== true) {
+                if (e.className === 'empty_field') {
+                    $('#warnings').hide(2400, 'linear');
+                    location.href = '/move?x=' + x + '&y=' + y;
+                }
+                else {
+                    $('#warnings').show(2400, 'linear');
+                    $(e).addClass('wrongField');
+                }
             }
         }
     </script>
 </head>
 <body>
 <div>
-    <div th:class="${classes[0][0]}" onclick="clickOnfield(this, 0, 0);"></div>
-    <div th:class="${classes[0][1]}" onclick="clickOnfield(this, 0, 1);"></div>
-    <div th:class="${classes[0][2]}" onclick="clickOnfield(this, 0, 2);"></div>
+    <div th:class="${classes[0][0]}" onclick="clickOnField(this, 0, 0);"></div>
+    <div th:class="${classes[0][1]}" onclick="clickOnField(this, 0, 1);"></div>
+    <div th:class="${classes[0][2]}" onclick="clickOnField(this, 0, 2);"></div>
 </div>
 <div>
-    <div th:class="${classes[1][0]}" onclick="clickOnfield(this, 1, 0);"></div>
-    <div th:class="${classes[1][1]}" onclick="clickOnfield(this, 1, 1);"></div>
-    <div th:class="${classes[1][2]}" onclick="clickOnfield(this, 1, 2);"></div>
+    <div th:class="${classes[1][0]}" onclick="clickOnField(this, 1, 0);"></div>
+    <div th:class="${classes[1][1]}" onclick="clickOnField(this, 1, 1);"></div>
+    <div th:class="${classes[1][2]}" onclick="clickOnField(this, 1, 2);"></div>
 </div>
 <div>
-    <div th:class="${classes[2][0]}" onclick="clickOnfield(this, 2, 0);"></div>
-    <div th:class="${classes[2][1]}" onclick="clickOnfield(this, 2, 1);"></div>
-    <div th:class="${classes[2][2]}" onclick="clickOnfield(this, 2, 2);"></div>
+    <div th:class="${classes[2][0]}" onclick="clickOnField(this, 2, 0);"></div>
+    <div th:class="${classes[2][1]}" onclick="clickOnField(this, 2, 1);"></div>
+    <div th:class="${classes[2][2]}" onclick="clickOnField(this, 2, 2);"></div>
 </div>
 
-<span id="warnings" style="display:none; color: yellow;">Wrong field!</span>
+<div id="warnings" style="display:none; color: yellow;">Wrong&nbsp;field!</div>
+<div id="Win message">H</div>
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.awsome.tictactoe.repositories;
+package com.awsome.tictactoe.repository;
 
 import com.awsome.tictactoe.model.User;
 
