@@ -42,12 +42,13 @@ public class GameController {
     }
 
     @PostMapping("/log_in")
-    public String logIn(@ModelAttribute User user){
+    public String logIn(@ModelAttribute User user, Model model){
         User savedUser = repository.findUser(user.getUsername());
         if (user.getPassword().equals(savedUser.getPassword())){
             return "redirect:/first_move";
         }else {
-            return "redirect:/";
+            model.addAttribute("message", "Log in failed! Try again or register.");
+            return "index";
         }
     }
 
@@ -72,8 +73,18 @@ public class GameController {
     }
 
     @PostMapping("/register")
-    public String register(){
-        return "redirect:/play";
+    public String register(@ModelAttribute User user, Model model){
+        if (user.getUsername().isEmpty()){
+            model.addAttribute("message", "Enter username!");
+        } else if (user.getPassword().isEmpty()){
+            model.addAttribute("message", "Please enter your password.");
+        } else if(repository.findUser(user.getUsername()) == null){
+            repository.saveUser(user);
+            return "redirect:/first_move";
+        } else {
+            model.addAttribute("message", "This username is already taken.");
+        }
+        return "index";
     }
 
     @GetMapping("/first_move")

@@ -1,9 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
     <meta charset="UTF-8" />
     <title>Tic-Tac-Toe Homepage</title>
     <link type="text/css" rel="stylesheet" href="style.css">
+    <script>
+
+    </script>
 </head>
 <body>
 
@@ -16,5 +23,6 @@
     <input type="submit" formaction="/register" value="Register" />
 </form>
 
+<div th:text="${message}" id="warnings" style="color: yellow;"></div>
 </body>
 </html>
