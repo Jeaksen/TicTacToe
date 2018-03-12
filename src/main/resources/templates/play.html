@@ -11,6 +11,12 @@
     <link type="text/css" rel="stylesheet" href="style.css" />
     <script th:inline="javascript">
         var finish_game = [[${game_finished}]];
+        $(document).ready(function () {
+            if (finish_game){
+                $("#win_message").css("color","red")
+            }
+        })
+
         var clickOnField = function ( e, x, y) {
             $('div').removeClass('wrongField');
             if (finish_game !== true) {
@@ -44,7 +50,7 @@
 </div>
 
 <div id="warnings" style="display:none; color: yellow;">Wrong&nbsp;field!</div>
-<div id="Win message">H</div>
+<div id="win_message" th:text="${finish_status}"></div>
 
 </body>
 </html>

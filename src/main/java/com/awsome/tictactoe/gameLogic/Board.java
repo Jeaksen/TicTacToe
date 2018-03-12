@@ -8,14 +8,18 @@ public class Board {
 
     public Board() {
         this.board = new FieldStatus[size][size];
+        this.resetBoard();
+    }
+
+    public FieldStatus[][] getBoard() {
+        return board;
+    }
+
+    public void resetBoard(){
         for (int i = 0; i < 3; i++){
             for (int j = 0; j < 3; j++){
                 this.board[i][j] = FieldStatus.Empty;
             }
         }
-    }
-
-    public FieldStatus[][] getBoard() {
-        return board;
     }
 }

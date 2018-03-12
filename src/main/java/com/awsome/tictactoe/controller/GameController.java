@@ -22,13 +22,15 @@ public class GameController {
     IUsersRepository repository = new ConsoleUsersRepository();
     WebView view;
     Board gameBoard;
+    IPlayer player1;
+    IPlayer player2;
 
 
     public GameController(){
         this.view = new WebView();
         statsRepo = new ConsoleStatisticsRepository();
-        IPlayer player1 = new RandomAIPlayer("AI_1");
-        IPlayer player2 = new HumanPlayer(view, "Bob");
+        this.player1 = new RandomAIPlayer("AI_1");
+        this.player2 = new HumanPlayer(view, "Bob");
         this.gameBoard = new Board();
         gameLogic = new TicTacToeLogic(gameBoard, player1, player2,statsRepo, view);
     }
@@ -52,14 +54,26 @@ public class GameController {
     @GetMapping("/play")
     public String play(Model model){
         model.addAttribute("classes", this.view.getBoardClasses());
-        if (this.gameLogic.getGameStatus() != GameStatus.InProgress){
+        GameStatus gameStatus = this.gameLogic.getGameStatus();
+        if (gameStatus != GameStatus.InProgress){
+            String message;
             model.addAttribute("game_finished", true);
+            switch (gameStatus){
+                case Tie:
+                 message="It's a tie!";
+                 break;
+                default:
+                    message = this.gameLogic.getCurrentPlayer()==player1?player2.getName():player1.getName();
+                    message += " wins!!!";
+            }
+            model.addAttribute("finish_status",message);
         }
         return "play";
     }
 
     @GetMapping("/first_move")
     public String startGame(){
+        this.resetBoard();
         if (!gameLogic.getCurrentPlayer().shouldWait()) {
             gameLogic.runStep(gameLogic.getCurrentPlayer().makeMove(this.gameBoard));
         }
@@ -74,6 +88,11 @@ public class GameController {
             gameLogic.runStep(gameLogic.getCurrentPlayer().makeMove(this.gameBoard));
         }
         return "redirect:/play";
+    }
+
+    private void resetBoard(){
+        this.gameBoard.resetBoard();
+        //gameLogic = new TicTacToeLogic(this.gameBoard, this.player1, this.player2,this.statsRepo, this.view);
     }
 
 }
