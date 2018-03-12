@@ -71,6 +71,11 @@ public class GameController {
         return "play";
     }
 
+    @PostMapping("/register")
+    public String register(){
+        return "redirect:/play";
+    }
+
     @GetMapping("/first_move")
     public String startGame(){
         this.resetBoard();
