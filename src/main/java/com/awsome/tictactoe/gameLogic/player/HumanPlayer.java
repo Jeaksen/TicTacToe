@@ -29,4 +29,9 @@ public class HumanPlayer implements IPlayer {
     public boolean shouldWait(){
         return true;
     }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
 }

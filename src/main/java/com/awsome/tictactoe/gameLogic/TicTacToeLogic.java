@@ -96,26 +96,26 @@ public class TicTacToeLogic {
         }
     }
 
-    private void saveStatistics(){
-        if (this.getGameStatus() == GameStatus.Tie){
-            statisticsRepository.saveResult(player1.getName(), PlayerResultStatus.Tie);
-            statisticsRepository.saveResult(player2.getName(), PlayerResultStatus.Tie);
-        } else if(this.getGameStatus() == GameStatus.Player1Won){
-            statisticsRepository.saveResult(player1.getName(), PlayerResultStatus.Won);
-            statisticsRepository.saveResult(player2.getName(), PlayerResultStatus.Lost);
-        } else {
-            statisticsRepository.saveResult(player2.getName(), PlayerResultStatus.Won);
-            statisticsRepository.saveResult(player1.getName(), PlayerResultStatus.Lost);
-        }
+    /**
+     * This methods calls a methods from IStatisticsRepository to save result when game is finished
+     * @throws Exception when there was an error during saving the result
+     */
+    private void saveGameResult() throws Exception {
+        statisticsRepository.saveResult(this.getGameStatus());
     }
 
-    public GameStatus runStep(Point point){
+    /**
+     *
+     * @param point X and Y coordinates of field that should be occupied
+     * @throws Exception When saving result fails
+     */
+    public void runStep(Point point) throws Exception {
         FieldStatus chosenField = currentPlayer == player1?FieldStatus.TakenByPlayer1:FieldStatus.TakenByPlayer2;
         gameBoard.getBoard()[point.x][point.y] = chosenField;
         currentPlayer = currentPlayer == player1?player2:player1;
         this.view.updateView(this.currentPlayer, this.gameBoard);
-        if (this.getGameStatus() != GameStatus.InProgress) {this.saveStatistics();}
-        return this.getGameStatus();
+        if (this.getGameStatus() != GameStatus.InProgress) {this.saveGameResult();}
+
     }
 
     public IPlayer getCurrentPlayer() {

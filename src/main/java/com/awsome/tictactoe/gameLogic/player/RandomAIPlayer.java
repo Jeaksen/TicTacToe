@@ -34,4 +34,9 @@ public class RandomAIPlayer implements IPlayer {
     public boolean shouldWait(){
         return false;
     }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
 }
