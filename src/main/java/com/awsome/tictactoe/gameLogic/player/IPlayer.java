@@ -1,4 +1,6 @@
-package com.awsome.tictactoe.gameLogic;
+package com.awsome.tictactoe.gameLogic.player;
+
+import com.awsome.tictactoe.gameLogic.Board;
 
 import java.awt.*;
 

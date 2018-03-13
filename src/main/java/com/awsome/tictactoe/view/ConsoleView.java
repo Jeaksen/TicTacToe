@@ -2,7 +2,7 @@ package com.awsome.tictactoe.view;
 
 import com.awsome.tictactoe.gameLogic.Board;
 import com.awsome.tictactoe.gameLogic.FieldStatus;
-import com.awsome.tictactoe.gameLogic.IPlayer;
+import com.awsome.tictactoe.gameLogic.player.IPlayer;
 
 import java.awt.*;
 import java.util.Scanner;

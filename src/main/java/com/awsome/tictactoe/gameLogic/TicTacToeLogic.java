@@ -1,5 +1,7 @@
 package com.awsome.tictactoe.gameLogic;
 
+import com.awsome.tictactoe.gameLogic.player.IPlayer;
+import com.awsome.tictactoe.gameLogic.statisticsRepository.IStatisticsRepository;
 import com.awsome.tictactoe.view.IView;
 
 import java.awt.*;
