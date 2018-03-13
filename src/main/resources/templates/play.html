@@ -33,6 +33,7 @@
     </script>
 </head>
 <body>
+<span class="board_frame">
 <div>
     <div th:class="${classes[0][0]}" onclick="clickOnField(this, 0, 0);"></div>
     <div th:class="${classes[0][1]}" onclick="clickOnField(this, 0, 1);"></div>
@@ -51,6 +52,6 @@
 
 <div id="warnings" style="display:none; color: yellow;">Wrong&nbsp;field!</div>
 <div id="win_message" th:text="${finish_status}"></div>
-
+</span>
 </body>
 </html>

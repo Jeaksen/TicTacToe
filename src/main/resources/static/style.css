@@ -6,8 +6,8 @@
 }
 
 div{
-    min-height: 50px;
-    min-width: 50px;
+    min-height: 120px;
+    min-width: 120px;
 }
 div div{
     display: inline-block;
@@ -35,4 +35,21 @@ div div{
     color: black;
 }
 
+.board_frame{
+    position: absolute;
+    top: 40%;
+    left: 40%;
+}
+
+.login_menu{
+    position: absolute;
+    top: 20%;
+    left: 35%
+}
+
+.button{
+    margin-top: 15px;
+    margin-right: 15px;
+    padding: 7px;
+}
 

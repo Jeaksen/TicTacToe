@@ -7,22 +7,24 @@
             crossorigin="anonymous"></script>
     <meta charset="UTF-8" />
     <title>Tic-Tac-Toe Homepage</title>
-    <link type="text/css" rel="stylesheet" href="style.css">
+    <link type="text/css" rel="stylesheet" href="style2.css">
     <script>
 
     </script>
 </head>
 <body>
-
+<h1 id="game_name">TIC TAC TOE</h1>
+<span class="login_menu">
 <form action="/log_in" method="post">
     <p>Username:</p>
     <input type="text" name="username"/>
     <p>Password:</p>
     <input type="text" name="password"/>
-    <input type="submit" value="Log in"/>
-    <input type="submit" formaction="/register" value="Register" />
+    <br/>
+    <input class="button" type="submit" value="Log in"/>
+    <input class="button" type="submit" formaction="/register" value="Register" />
 </form>
-
+</span>
 <div th:text="${message}" id="warnings" style="color: yellow;"></div>
 </body>
 </html>
