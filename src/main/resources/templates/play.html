@@ -50,9 +50,27 @@
     <div th:class="${classes[2][2]}" onclick="clickOnField(this, 2, 2);"></div>
 </div>
 
-<div id="warnings">Wrong&nbsp;field!</div>
-<div id="win_message" th:text="${finish_status}"></div>
 </span>
-<a id="restart" href="/first_move">PLAY AGAIN</a>
+<div id="warnings">Wrong&nbsp;field!</div>
+
+<span>
+<div id="win_message" th:text="${finish_status}"></div>
+    <a id="restart" href="/first_move">PLAY AGAIN</a>
+</span>
+
+<span class="scores">
+    <div>
+        <div>P1 wins</div>
+        <div>2</div>
+    </div>
+    <div>
+        <div>Ties</div>
+        <div>1</div>
+    </div>
+    <div>
+        <div>P2 wins</div>
+        <div>3</div>
+    </div>
+</span>
 </body>
 </html>
