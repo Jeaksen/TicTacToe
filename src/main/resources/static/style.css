@@ -1,13 +1,22 @@
+html{
+    height: 100%;
+    width: 100%;
+    background-image: url("https://euromat.com.pl/pol_pl_Cerata-w-Rolkach-Florista-112-03-301_1.jpg") ;
+    color: white;
+    position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 * {
     margin: 0;
     padding: 0;
-    background: black;
     color: white;
 }
 
 div{
-    min-height: 120px;
-    min-width: 120px;
+    min-height: 180px;
+    min-width: 180px;
 }
 div div{
     display: inline-block;
@@ -15,41 +24,72 @@ div div{
 }
 
 .x_field{
-    background: aqua;
+    background-image: url("http://image-cdn.neatoshop.com/styleimg/68182/none/white/default/374109-19;1516023691i.jpg");
+    position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .o_field{
-    background: red;
+    background-image: url("https://data1.cupsell.pl/upload/generator/70522/640x420/1196166_print-trimmed-1.png?resize=max_sizes&key=55f9a22768eed085006592c1174c0235");
+    position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .empty_field{
-    background: white;
+    background: whitesmoke;
+    opacity: 0.9;
 }
 
 .wrongField{
-    opacity: 0.7;
+    opacity: 0.5;
     transition: 2s;
 }
 
+#warnings{
+    display: none;
+    color: yellow;
+    font-family: "Comic Sans MS";
+    font-weight: bold;
+    font-size: 1.7em;
+    position: absolute;
+    left: 123%;
+    top: 55%;
+}
+
 #win_message{
-    color: black;
+    margin-top: 15px;
+    margin-right: 15px;
+    color: #03e7f4;
+    font-family: "Comic Sans MS";
+    font-weight: bold;
+    font-size: 2.3em;
+    position: absolute;
+    left: 125%;
+    top: 61%;
 }
 
 .board_frame{
     position: absolute;
-    top: 40%;
-    left: 40%;
+    top: 5%;
+    left: 7.5%;
 }
 
-.login_menu{
-    position: absolute;
-    top: 20%;
-    left: 35%
-}
-
-.button{
+#restart{
     margin-top: 15px;
     margin-right: 15px;
     padding: 7px;
+    background-color: whitesmoke;
+    color: darkblue;
+    font-family: "Comic Sans MS";
+    font-weight: bold;
+    font-size: 1.5em;
+    border-radius: 5px;
+    position: absolute;
+    left: 62%;
+    top: 77%;
+    text-decoration: none;
+
 }
 

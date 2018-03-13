@@ -37,6 +37,16 @@ body{
     left: 37%;
 }
 
+#warnings{
+    color: springgreen;
+    font-family: "Comic Sans MS";
+    position: absolute;
+    font-weight: bold;
+    top: 80%;
+    left: 38%;
+    font-size: 1.7em;
+}
+
 div{
     min-height: 120px;
     min-width: 120px;
