@@ -97,8 +97,8 @@ div div{
     font-weight: bold;
     font-size: 2.3em;
     position: absolute;
-    left: 125%;
-    top: 61%;
+    left: 62%;
+    top: 57%;
 }
 
 .board_frame{
@@ -121,7 +121,7 @@ div div{
     left: 62%;
     top: 77%;
     text-decoration: none;
-
+    display: none;
 }
 
 

@@ -67,34 +67,34 @@ public class TicTacToeLogic {
         return GameStatus.Tie;
     }
 
-    public void runGame(){
-        IPlayer currentPlayer = player1;
-        Point chosenPoint;
-        while (this.getGameStatus() == GameStatus.InProgress){
-            chosenPoint = currentPlayer.makeMove(this.gameBoard);
-            if (chosenPoint == null){
-                this.view.updateView(currentPlayer, gameBoard);
-                return;
-            }
-            while (gameBoard.getBoard()[chosenPoint.x][chosenPoint.y] != FieldStatus.Empty){
-                this.view.displayMessage("This field is already taken, please retry");
-                chosenPoint =  currentPlayer.makeMove(this.gameBoard);
-            }
-            if (currentPlayer == player1){
-                FieldStatus chosenField = FieldStatus.TakenByPlayer1;
-                gameBoard.getBoard()[chosenPoint.x][chosenPoint.y] = chosenField;
-            } else {
-                FieldStatus chosenField = FieldStatus.TakenByPlayer2;
-                gameBoard.getBoard()[chosenPoint.x][chosenPoint.y] = chosenField;
-            }
-            if(currentPlayer == player1){
-                currentPlayer = player2;
-            } else {
-                currentPlayer = player1;
-            }
-            this.view.updateView(currentPlayer, gameBoard);
-        }
-    }
+//    public void runGame(){
+//        IPlayer currentPlayer = player1;
+//        Point chosenPoint;
+//        while (this.getGameStatus() == GameStatus.InProgress){
+//            chosenPoint = currentPlayer.makeMove(this.gameBoard);
+//            if (chosenPoint == null){
+//                this.view.updateView(currentPlayer, gameBoard);
+//                return;
+//            }
+//            while (gameBoard.getBoard()[chosenPoint.x][chosenPoint.y] != FieldStatus.Empty){
+//                this.view.displayMessage("This field is already taken, please retry");
+//                chosenPoint =  currentPlayer.makeMove(this.gameBoard);
+//            }
+//            if (currentPlayer == player1){
+//                FieldStatus chosenField = FieldStatus.TakenByPlayer1;
+//                gameBoard.getBoard()[chosenPoint.x][chosenPoint.y] = chosenField;
+//            } else {
+//                FieldStatus chosenField = FieldStatus.TakenByPlayer2;
+//                gameBoard.getBoard()[chosenPoint.x][chosenPoint.y] = chosenField;
+//            }
+//            if(currentPlayer == player1){
+//                currentPlayer = player2;
+//            } else {
+//                currentPlayer = player1;
+//            }
+//            this.view.updateView(currentPlayer, gameBoard);
+//        }
+//    }
 
     /**
      * This methods calls a methods from IStatisticsRepository to save result when game is finished

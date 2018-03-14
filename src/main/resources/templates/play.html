@@ -14,6 +14,7 @@
         $(document).ready(function () {
             if (finish_game){
                 $("#win_message").css("color","red")
+                $("#restart").css("display","block")
             }
         });
 
@@ -33,43 +34,43 @@
     </script>
 </head>
 <body>
-<span class="board_frame">
-<div>
-    <div th:class="${classes[0][0]}" onclick="clickOnField(this, 0, 0);"></div>
-    <div th:class="${classes[0][1]}" onclick="clickOnField(this, 0, 1);"></div>
-    <div th:class="${classes[0][2]}" onclick="clickOnField(this, 0, 2);"></div>
-</div>
-<div>
-    <div th:class="${classes[1][0]}" onclick="clickOnField(this, 1, 0);"></div>
-    <div th:class="${classes[1][1]}" onclick="clickOnField(this, 1, 1);"></div>
-    <div th:class="${classes[1][2]}" onclick="clickOnField(this, 1, 2);"></div>
-</div>
-<div>
-    <div th:class="${classes[2][0]}" onclick="clickOnField(this, 2, 0);"></div>
-    <div th:class="${classes[2][1]}" onclick="clickOnField(this, 2, 1);"></div>
-    <div th:class="${classes[2][2]}" onclick="clickOnField(this, 2, 2);"></div>
-</div>
 
+<span class="board_frame">
+    <div>
+        <div th:class="${classes[0][0]}" onclick="clickOnField(this, 0, 0);"></div>
+        <div th:class="${classes[0][1]}" onclick="clickOnField(this, 0, 1);"></div>
+        <div th:class="${classes[0][2]}" onclick="clickOnField(this, 0, 2);"></div>
+    </div>
+    <div>
+        <div th:class="${classes[1][0]}" onclick="clickOnField(this, 1, 0);"></div>
+        <div th:class="${classes[1][1]}" onclick="clickOnField(this, 1, 1);"></div>
+        <div th:class="${classes[1][2]}" onclick="clickOnField(this, 1, 2);"></div>
+    </div>
+    <div>
+        <div th:class="${classes[2][0]}" onclick="clickOnField(this, 2, 0);"></div>
+        <div th:class="${classes[2][1]}" onclick="clickOnField(this, 2, 1);"></div>
+        <div th:class="${classes[2][2]}" onclick="clickOnField(this, 2, 2);"></div>
+    </div>
 </span>
-<div id="warnings">Wrong&nbsp;field!</div>
 
 <span>
-<div id="win_message" th:text="${finish_status}"></div>
+    <div id="warnings">Wrong&nbsp;field!</div>
+    <div id="win_message" th:text="${finish_status}"></div>
     <a id="restart" href="/first_move">PLAY AGAIN</a>
 </span>
 
 <span class="scores">
     <div>
         <div>P1 wins</div>
-        <div>2</div>
+        <div th:text="${game_stats.wins_player1}">0</div>
     </div>
     <div>
         <div>Ties</div>
-        <div>1</div>
+        <div th:text="${game_stats.ties}">0</div>
     </div>
     <div>
         <div>P2 wins</div>
-        <div>3</div>
+        <div th:text="${game_stats.wins_player2}">0</div>
     </div>
 </span>
 </body>

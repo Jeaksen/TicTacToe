@@ -7,6 +7,7 @@ import com.awsome.tictactoe.gameLogic.player.RandomAIPlayer;
 import com.awsome.tictactoe.gameLogic.statisticsRepository.ConsoleStatisticsRepository;
 import com.awsome.tictactoe.gameLogic.statisticsRepository.DBStatisticsRepository;
 import com.awsome.tictactoe.gameLogic.statisticsRepository.IStatisticsRepository;
+import com.awsome.tictactoe.gameLogic.statisticsRepository.SessionResults;
 import com.awsome.tictactoe.model.User;
 import com.awsome.tictactoe.repository.DBUsersRepository;
 import com.awsome.tictactoe.repository.IUsersRepository;
@@ -18,8 +19,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.awt.*;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class GameController {
@@ -31,6 +35,7 @@ public class GameController {
     Board gameBoard;
     IPlayer player1;
     IPlayer player2;
+    Map<String, SessionResults> sessionResultsMap;
 
 
     public GameController() throws SQLException {
@@ -41,6 +46,7 @@ public class GameController {
         this.gameBoard = new Board();
         this.usersRepository = new DBUsersRepository();
         gameLogic = new TicTacToeLogic(gameBoard, player1, player2, statisticsRepository, view);
+        sessionResultsMap = new HashMap<>();
     }
 
 
@@ -57,6 +63,7 @@ public class GameController {
             if (user.getPassword().equals(savedUser.getPassword())) {
                 this.player1.setName(user.getUsername());
                 this.statisticsRepository.startSession(player1.getName(), player2.getName());
+                this.sessionResultsMap.put(player1.getName(), new SessionResults(0,0,0,player1.getName(),player2.getName()));
                 return "redirect:/first_move";
             } else {
                 model.addAttribute("message", "Log in failed! Try again or register.");
@@ -96,7 +103,6 @@ public class GameController {
 
     @GetMapping("/play")
     public String play(Model model) {
-        model.addAttribute("classes", this.view.getBoardClasses());
         GameStatus gameStatus = this.gameLogic.getGameStatus();
         if (gameStatus != GameStatus.InProgress) {
             String message;
@@ -110,12 +116,19 @@ public class GameController {
                     message += " wins!!!";
             }
             model.addAttribute("finish_status", message);
+            try {
+                sessionResultsMap.put(player1.getName(), this.statisticsRepository.getSessionResults(player1.getName()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+        model.addAttribute("classes", this.view.getBoardClasses());
+        model.addAttribute("game_stats", sessionResultsMap.get(player1.getName()));
         return "play";
     }
 
     @GetMapping("/first_move")
-    public String startGame() {
+    public String startGame(HttpServletRequest request) {
         this.resetBoard();
         if (!gameLogic.getCurrentPlayer().shouldWait()) {
             try {
