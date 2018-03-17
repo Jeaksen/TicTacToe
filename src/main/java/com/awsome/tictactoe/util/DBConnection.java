@@ -8,9 +8,10 @@ public class DBConnection {
 
     private final static String USERNAME = "tictacteo";
     private final static String PASSWORD = "#verihardpassword";
-    private final static String CONNSTRING = "jdbc:mysql://den1.mysql6.gear.host/tictacteo?useSSL=false&verifyServerCertificate=false";
+    private final static String CONNSTRING = "jdbc:mysql://den1.mysql6.gear.host/tictacteo?useSSL=false&verifyServerCertificate=false&autoReconnect=true";
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(CONNSTRING, USERNAME, PASSWORD);
     }
+
 }

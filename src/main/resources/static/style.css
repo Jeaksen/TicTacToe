@@ -1,70 +1,49 @@
-html{
-    height: 100%;
-    width: 100%;
-    background-image: url("https://euromat.com.pl/pol_pl_Cerata-w-Rolkach-Florista-112-03-301_1.jpg") ;
-    color: white;
-    position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
 * {
     margin: 0;
     padding: 0;
     color: white;
+    font-family: "Comic Sans MS", serif;
 }
 
-.scores{
-    display: inline-block;
-    color: yellow;
-    border-color: red;
-    border-width: medium;
+html{
+    height: 100%;
+    width: 100%;
+    position: center;
+    background: url("https://euromat.com.pl/pol_pl_Cerata-w-Rolkach-Florista-112-03-301_1.jpg") no-repeat;
+    background-size: cover;
+}
+
+body{
+    height: 100%;
+    width: 100%;
+}
+
+.board_frame{
     position: absolute;
-    top: 10%;
-    left: 55%
-}
-
-.scores div{
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    background-color: whitesmoke;
-    border:2px solid darkslateblue;
-    color: darkslateblue;
-    font-family: "Comic Sans MS";
-    text-decoration-style: solid;
-    font-size: 1.2em;
-    border-width: medium;
-    min-height: 50px;
-    min-width: 120px;
-}
-
-.scores div div{
+    top: 8vh;
+    left: 4vw;
     display: block;
-    vertical-align: middle;
-    font-size: medium;
 }
 
-div{
-    min-height: 180px;
-    min-width: 180px;
+.board_frame div{
+    display: block;
 }
-div div{
+
+.board_frame div div{
+    min-height: 28vh;
+    min-width: 28vh;
     display: inline-block;
-
 }
 
 .x_field{
-    background-image: url("http://image-cdn.neatoshop.com/styleimg/68182/none/white/default/374109-19;1516023691i.jpg");
     position: center;
-    background-repeat: no-repeat;
+    background: url("http://image-cdn.neatoshop.com/styleimg/68182/none/white/default/374109-19;1516023691i.jpg") no-repeat;
     background-size: cover;
 }
 
 .o_field{
-    background-image: url("https://data1.cupsell.pl/upload/generator/70522/640x420/1196166_print-trimmed-1.png?resize=max_sizes&key=55f9a22768eed085006592c1174c0235");
     position: center;
-    background-repeat: no-repeat;
+    background: url("https://data1.cupsell.pl/upload/generator/70522/640x420/1196166_print-trimmed-1.png?resize=max_sizes&key=55f9a22768eed085006592c1174c0235") no-repeat;
     background-size: cover;
 }
 
@@ -78,14 +57,42 @@ div div{
     transition: 2s;
 }
 
+.scores{
+    display: inline-block;
+    color: yellow;
+    border: medium red;
+    position: absolute;
+    top: 10%;
+    left: 55%
+}
+
+.scores div{
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    background-color: whitesmoke;
+    color: darkslateblue;
+    font-family: "Comic Sans MS", serif;
+    text-decoration-style: solid;
+    font-size: 1.2em;
+    border: medium solid darkslateblue;
+    min-height: 50px;
+    min-width: 120px;
+}
+
+.scores div div{
+    display: block;
+    vertical-align: middle;
+    font-size: medium;
+}
+
 #warnings{
     display: none;
     color: yellow;
-    font-family: "Comic Sans MS";
     font-weight: bold;
     font-size: 1.7em;
     position: absolute;
-    left: 123%;
+    left: 62%;
     top: 55%;
 }
 
@@ -93,18 +100,11 @@ div div{
     margin-top: 15px;
     margin-right: 15px;
     color: #03e7f4;
-    font-family: "Comic Sans MS";
     font-weight: bold;
     font-size: 2.3em;
     position: absolute;
     left: 62%;
     top: 57%;
-}
-
-.board_frame{
-    position: absolute;
-    top: 5%;
-    left: 7.5%;
 }
 
 #restart{
@@ -113,7 +113,6 @@ div div{
     padding: 7px;
     background-color: whitesmoke;
     color: darkblue;
-    font-family: "Comic Sans MS";
     font-weight: bold;
     font-size: 1.5em;
     border-radius: 5px;

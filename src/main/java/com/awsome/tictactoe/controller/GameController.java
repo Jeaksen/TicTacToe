@@ -9,6 +9,7 @@ import com.awsome.tictactoe.gameLogic.statisticsRepository.DBStatisticsRepositor
 import com.awsome.tictactoe.gameLogic.statisticsRepository.IStatisticsRepository;
 import com.awsome.tictactoe.gameLogic.statisticsRepository.SessionResults;
 import com.awsome.tictactoe.model.User;
+import com.awsome.tictactoe.repository.ConsoleUsersRepository;
 import com.awsome.tictactoe.repository.DBUsersRepository;
 import com.awsome.tictactoe.repository.IUsersRepository;
 import com.awsome.tictactoe.view.WebView;
@@ -40,13 +41,15 @@ public class GameController {
 
     public GameController() throws SQLException {
         this.view = new WebView();
-        statisticsRepository = new DBStatisticsRepository();
+        //this.statisticsRepository = new ConsoleStatisticsRepository();
+        this.statisticsRepository = new DBStatisticsRepository();
         this.player1 = new HumanPlayer(view, "Bob");
         this.player2 = new RandomAIPlayer("Dummie");
         this.gameBoard = new Board();
+        //this.usersRepository = new ConsoleUsersRepository();
         this.usersRepository = new DBUsersRepository();
-        gameLogic = new TicTacToeLogic(gameBoard, player1, player2, statisticsRepository, view);
-        sessionResultsMap = new HashMap<>();
+        this.gameLogic = new TicTacToeLogic(gameBoard, player1, player2, statisticsRepository, view);
+        this.sessionResultsMap = new HashMap<>();
     }
 
 
@@ -90,6 +93,7 @@ public class GameController {
                 usersRepository.saveUser(user);
                 player1.setName(user.getUsername());
                 this.statisticsRepository.startSession(player1.getName(), player2.getName());
+                this.sessionResultsMap.put(player1.getName(), new SessionResults(0,0,0,player1.getName(),player2.getName()));
                 return "redirect:/first_move";
             } else {
                 model.addAttribute("message", "This username is already taken.");
@@ -128,7 +132,7 @@ public class GameController {
     }
 
     @GetMapping("/first_move")
-    public String startGame(HttpServletRequest request) {
+    public String startGame() {
         this.resetBoard();
         if (!gameLogic.getCurrentPlayer().shouldWait()) {
             try {
