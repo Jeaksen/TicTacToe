@@ -112,9 +112,9 @@ public class TicTacToeLogic {
     public void runStep(Point point) throws Exception {
         FieldStatus chosenField = currentPlayer == player1?FieldStatus.TakenByPlayer1:FieldStatus.TakenByPlayer2;
         gameBoard.getBoard()[point.x][point.y] = chosenField;
-        currentPlayer = currentPlayer == player1?player2:player1;
         this.view.updateView(this.currentPlayer, this.gameBoard);
         if (this.getGameStatus() != GameStatus.InProgress) {this.saveGameResult();}
+        currentPlayer = currentPlayer == player1?player2:player1;
 
     }
 

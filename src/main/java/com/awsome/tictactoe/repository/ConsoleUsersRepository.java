@@ -13,6 +13,6 @@ public class ConsoleUsersRepository implements IUsersRepository {
     @Override
     public User findUser(String username) {
         User user = new User(username, "*");
-        return null;
+        return user;
     }
 }

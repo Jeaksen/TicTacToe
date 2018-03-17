@@ -6,15 +6,17 @@
     <script
             src="https://code.jquery.com/jquery-3.3.1.js"
             integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-            crossorigin="anonymous"></script>
+            crossorigin="anonymous">
+
+    </script>
 
     <link type="text/css" rel="stylesheet" href="style.css" />
     <script th:inline="javascript">
         var finish_game = [[${game_finished}]];
         $(document).ready(function () {
             if (finish_game){
-                $("#win_message").css("color","red")
-                $("#restart").css("display","block")
+                $("#win_message").css("color","red");
+                $("#restart").css("display","block");
             }
         });
 
@@ -22,11 +24,10 @@
             $('div').removeClass('wrongField');
             if (finish_game !== true) {
                 if (e.className === 'empty_field') {
-                    $('#warnings').hide(2400, 'linear');
                     location.href = '/move?x=' + x + '&y=' + y;
                 }
                 else {
-                    $('#warnings').show(2400, 'linear');
+                    $('#warnings').show(2400);
                     $(e).addClass('wrongField');
                 }
             }
@@ -61,7 +62,7 @@
 
 <span class="scores">
     <div>
-        <div>P1 wins</div>
+        <div th:text="${game_stats.name_player1} + ' wins'">P1 wins</div>
         <div th:text="${game_stats.wins_player1}">0</div>
     </div>
     <div>
@@ -69,7 +70,7 @@
         <div th:text="${game_stats.ties}">0</div>
     </div>
     <div>
-        <div>P2 wins</div>
+        <div th:text="${game_stats.name_player2} + ' wins'">P2 wins</div>
         <div th:text="${game_stats.wins_player2}">0</div>
     </div>
 </span>
