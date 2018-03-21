@@ -24,17 +24,23 @@
             $('div').removeClass('wrongField');
             if (finish_game !== true) {
                 if (e.className === 'empty_field') {
-                    location.href = '/move?x=' + x + '&y=' + y;
+                    post(x,y);
                 }
                 else {
                     $('#warnings').show(2400);
                     $(e).addClass('wrongField');
                 }
             }
+        };
+        
+        var post = function (x, y) {
+            $("#data").append('<input type="hidden" name="x" value="' + x + '" />')
+                .append('<input type=hidden name="y" value="' + y + '" />').submit();
         }
     </script>
 </head>
 <body>
+<form id="data" action="/move" method="post"></form>
 
 <span class="board_frame">
     <div>

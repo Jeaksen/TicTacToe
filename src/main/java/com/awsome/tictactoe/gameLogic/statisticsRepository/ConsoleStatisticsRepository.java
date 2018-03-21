@@ -7,18 +7,19 @@ import java.sql.SQLException;
 
 public class ConsoleStatisticsRepository implements IStatisticsRepository {
 
+
     @Override
-    public void saveResult(GameStatus playerResultStatus) throws SQLException{
+    public void saveResult(GameStatus playerResultStatus, int sessionID) throws Exception {
 
     }
 
     @Override
-    public void startSession(String player1Name, String player2Name) throws SQLException{
-
+    public int startSession(String player1Name, String player2Name) throws Exception {
+        return 0;
     }
 
     @Override
-    public SessionResults getSessionResults(String playerName)throws SQLException {
+    public SessionResults getSessionResults(int sessionID) throws Exception {
         return null;
     }
 }

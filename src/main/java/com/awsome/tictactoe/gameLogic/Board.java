@@ -11,6 +11,10 @@ public class Board {
         this.resetBoard();
     }
 
+    public Board(FieldStatus[][] board){
+        this.board = board;
+    }
+
     public FieldStatus[][] getBoard() {
         return board;
     }

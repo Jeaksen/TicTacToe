@@ -8,26 +8,31 @@ import java.awt.*;
 
 public class TicTacToeLogic {
 
-    private Board gameBoard;
-    private IPlayer player1;
-    private IPlayer player2;
+//    private Board gameBoard;
+//    private IPlayer player1;
+//    private IPlayer player2;
     private IStatisticsRepository statisticsRepository;
-    private IView view;
-    private IPlayer currentPlayer;
+//    private IView view;
+//    private IPlayer currentPlayer;
 
 
-    public TicTacToeLogic(Board gameBoard, IPlayer player1, IPlayer player2,
-                          IStatisticsRepository statisticsRepository, IView view) {
-        this.gameBoard = gameBoard;
-        this.player1 = player1;
-        this.player2 = player2;
+//    public TicTacToeLogic(Board gameBoard, IPlayer player1, IPlayer player2,
+//                          IStatisticsRepository statisticsRepository, IView view) {
+//        this.gameBoard = gameBoard;
+//        this.player1 = player1;
+//        this.player2 = player2;
+//        this.statisticsRepository = statisticsRepository;
+//        this.view = view;
+//        this.currentPlayer = player1;
+//    }
+
+
+    public TicTacToeLogic(IStatisticsRepository statisticsRepository) {
         this.statisticsRepository = statisticsRepository;
-        this.view = view;
-        this.currentPlayer = player1;
     }
 
-    public GameStatus getGameStatus(){
-        FieldStatus[][] gameBoard = this.gameBoard.getBoard();
+    public GameStatus getGameStatus(Board board){
+        FieldStatus[][] gameBoard = board.getBoard();
 
         if(gameBoard[0][0] == gameBoard[1][1] && gameBoard[1][1] == gameBoard[2][2]  && gameBoard[2][2] != FieldStatus.Empty){
             if (gameBoard[0][0] == FieldStatus.TakenByPlayer1){
@@ -100,8 +105,8 @@ public class TicTacToeLogic {
      * This methods calls a methods from IStatisticsRepository to save result when game is finished
      * @throws Exception when there was an error during saving the result
      */
-    private void saveGameResult() throws Exception {
-        statisticsRepository.saveResult(this.getGameStatus());
+    private void saveGameResult(Board gameBoard, int sessionID) throws Exception {
+        statisticsRepository.saveResult(this.getGameStatus(gameBoard), sessionID);
     }
 
     /**
@@ -109,20 +114,17 @@ public class TicTacToeLogic {
      * @param point X and Y coordinates of field that should be occupied
      * @throws Exception When saving result fails
      */
-    public void runStep(Point point) throws Exception {
-        FieldStatus chosenField = currentPlayer == player1?FieldStatus.TakenByPlayer1:FieldStatus.TakenByPlayer2;
-        gameBoard.getBoard()[point.x][point.y] = chosenField;
-        this.view.updateView(this.currentPlayer, this.gameBoard);
-        if (this.getGameStatus() != GameStatus.InProgress) {this.saveGameResult();}
-        currentPlayer = currentPlayer == player1?player2:player1;
+    public void runStep(Point point, IPlayer currentPlayer, IPlayer player1, IPlayer player2, Board gameBoard, int sessionID) throws Exception {
 
-    }
+        gameBoard.getBoard()[point.x][point.y] = currentPlayer == player1?FieldStatus.TakenByPlayer1:FieldStatus.TakenByPlayer2;
+        if (this.getGameStatus(gameBoard) != GameStatus.InProgress) {this.saveGameResult(gameBoard, sessionID);}
+        }
 
-    public IPlayer getCurrentPlayer() {
-        return this.currentPlayer;
-    }
+//    public IPlayer getCurrentPlayer() {
+//        return this.currentPlayer;
+//    }
 
-    public void setCurrentPlayer(IPlayer currentPlayer){
-        this.currentPlayer = currentPlayer;
-    }
+//    public void setCurrentPlayer(IPlayer currentPlayer){
+//        this.currentPlayer = currentPlayer;
+//    }
 }
