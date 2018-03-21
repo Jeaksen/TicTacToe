@@ -31,19 +31,11 @@ public class GameController {
     private TicTacToeLogic gameLogic;
     private IStatisticsRepository statisticsRepository;
     private IUsersRepository usersRepository;
-//    WebView view;
-//    Board gameBoard;
-//    IPlayer player1;
     private IPlayer player2;
     private Map<Integer, SessionResults> sessionResultsMap;
 
 
     public GameController() throws SQLException {
-//        this.view = new WebView();
-//        this.player1 = new HumanPlayer("Bob");
-//        this.gameBoard = new Board();
-//        this.statisticsRepository = new ConsoleStatisticsRepository();
-//        this.usersRepository = new ConsoleUsersRepository();
         this.statisticsRepository = new DBStatisticsRepository();
         this.usersRepository = new DBUsersRepository();
         this.player2 = new RandomAIPlayer("Dummie");
@@ -65,6 +57,7 @@ public class GameController {
             if (!user.getPassword().isEmpty() && user.getPassword().equals(savedUser.getPassword())) {
                 SessionData sessionData = this.startSession(user.getUsername());
                 request.getSession().setAttribute("data", sessionData);
+                this.clearMap(sessionData.getPlayer1().getName(), null, sessionData.getSessionID());
                 return "redirect:/first_move";
             } else {
                 model.addAttribute("message", "Log in failed! Try again or register.");
@@ -100,19 +93,6 @@ public class GameController {
             model.addAttribute("message", "Error occurred while saving data, please retry");
         }
         return "index";
-    }
-
-    private SessionData startSession(String name) throws Exception {
-        int sessionID;
-        sessionID = this.statisticsRepository.startSession(name, player2.getName());
-        this.sessionResultsMap.put(sessionID, new SessionResults(0,0,0,name,player2.getName()));
-        SessionData sessionData = new SessionData();
-        sessionData.setPlayer1(new HumanPlayer(name));
-        sessionData.setPlayer2(this.player2);
-        sessionData.setCurrentPlayer(sessionData.getPlayer2());
-        sessionData.setBoard(new Board());
-        sessionData.setSessionID(sessionID);
-        return sessionData;
     }
 
     @GetMapping("/play")
@@ -157,6 +137,27 @@ public class GameController {
         return this.play(request, model);
     }
 
+    @GetMapping("/log_out")
+    public String logout(HttpServletRequest request){
+        SessionData sessionData = (SessionData)request.getSession().getAttribute("data");
+        this.sessionResultsMap.remove(sessionData.getSessionID());
+        request.removeAttribute("data");
+        return "redirect:/";
+    }
+
+    private SessionData startSession(String name) throws Exception {
+        int sessionID;
+        sessionID = this.statisticsRepository.startSession(name, player2.getName());
+        this.sessionResultsMap.put(sessionID, new SessionResults(0,0,0,name,player2.getName()));
+        SessionData sessionData = new SessionData();
+        sessionData.setPlayer1(new HumanPlayer(name));
+        sessionData.setPlayer2(this.player2);
+        sessionData.setCurrentPlayer(sessionData.getPlayer2());
+        sessionData.setBoard(new Board());
+        sessionData.setSessionID(sessionID);
+        return sessionData;
+    }
+
     private void switchPlayers(SessionData sessionData){
         sessionData.setCurrentPlayer(sessionData.getCurrentPlayer() == sessionData.getPlayer1()? sessionData.getPlayer2():sessionData.getPlayer1());
     }
@@ -183,8 +184,21 @@ public class GameController {
         }
     }
 
-//    private void resetBoard(SessionData sessionData) {
-//        sessionData.getBoard().resetBoard();
-//    }
+    private void clearMap(String player1, String player2, int currentSessionID){
+        SessionResults results;
+        for (int i = 0; i < currentSessionID; i++) {
+            results = this.sessionResultsMap.get(i);
+            if (results != null){
+                if (player1 != null && results.getName_player1().equals(player1)){
+                    this.sessionResultsMap.remove(i);
+                    System.out.println("I delete");
+                }
+                if (player2 != null && results.getName_player1().equals(player2)){
+                    this.sessionResultsMap.remove(i);
+                    System.out.println("I delete");
+                }
+            }
+        }
+    }
 
 }
