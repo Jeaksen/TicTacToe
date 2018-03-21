@@ -8,12 +8,12 @@
 html{
     height: 100%;
     width: 100%;
-    position: center;
-    background: url("https://euromat.com.pl/pol_pl_Cerata-w-Rolkach-Florista-112-03-301_1.jpg") no-repeat;
-    background-size: cover;
 }
 
 body{
+    background: url("https://euromat.com.pl/pol_pl_Cerata-w-Rolkach-Florista-112-03-301_1.jpg") no-repeat;
+    background-size: cover;
+    position: center;
     height: 100%;
     width: 100%;
 }
@@ -108,6 +108,22 @@ body{
 }
 
 #restart{
+    position: absolute;
+    top: 72vh;
+    left: 62vw;
+    text-decoration: none;
+    display: none;
+}
+
+#log_out{
+    position: absolute;
+    margin: 2px;
+    top: 0;
+    left: 0;
+    text-decoration: none;
+}
+
+.button{
     margin-top: 15px;
     margin-right: 15px;
     padding: 7px;
@@ -116,11 +132,6 @@ body{
     font-weight: bold;
     font-size: 1.5em;
     border-radius: 5px;
-    position: absolute;
-    left: 62%;
-    top: 77%;
-    text-decoration: none;
-    display: none;
 }
 
 

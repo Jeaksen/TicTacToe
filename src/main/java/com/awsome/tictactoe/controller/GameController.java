@@ -62,7 +62,7 @@ public class GameController {
         User savedUser;
         try {
             savedUser = usersRepository.findUser(user.getUsername());
-            if (user.getPassword().equals(savedUser.getPassword())) {
+            if (!user.getPassword().isEmpty() && user.getPassword().equals(savedUser.getPassword())) {
                 SessionData sessionData = this.startSession(user.getUsername());
                 request.getSession().setAttribute("data", sessionData);
                 return "redirect:/first_move";
