@@ -71,10 +71,6 @@ public class WebView implements IView {
 
     }
 
-    public String[][] getBoardClasses(){
-        return boardClasses;
-    }
-
     public void resetBoard(){
         for (int i = 0; i < Board.size; i++) {
             for (int j = 0; j < Board.size; j++) {

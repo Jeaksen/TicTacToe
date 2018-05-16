@@ -1,23 +1,25 @@
 package com.awsome.tictactoe.controller;
 
-import com.awsome.tictactoe.gameLogic.*;
+import com.awsome.tictactoe.gameLogic.Board;
+import com.awsome.tictactoe.gameLogic.GameStatus;
+import com.awsome.tictactoe.gameLogic.TicTacToeLogic;
 import com.awsome.tictactoe.gameLogic.player.HumanPlayer;
 import com.awsome.tictactoe.gameLogic.player.IPlayer;
 import com.awsome.tictactoe.gameLogic.player.RandomAIPlayer;
-import com.awsome.tictactoe.gameLogic.statisticsRepository.ConsoleStatisticsRepository;
 import com.awsome.tictactoe.gameLogic.statisticsRepository.DBStatisticsRepository;
 import com.awsome.tictactoe.gameLogic.statisticsRepository.IStatisticsRepository;
 import com.awsome.tictactoe.gameLogic.statisticsRepository.SessionResults;
 import com.awsome.tictactoe.model.SessionData;
 import com.awsome.tictactoe.model.User;
-import com.awsome.tictactoe.repository.ConsoleUsersRepository;
 import com.awsome.tictactoe.repository.DBUsersRepository;
 import com.awsome.tictactoe.repository.IUsersRepository;
 import com.awsome.tictactoe.view.WebView;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.awt.*;
@@ -99,6 +101,7 @@ public class GameController {
     public String play(HttpServletRequest request, Model model) {
         SessionData sessionData = (SessionData)request.getSession().getAttribute("data");
         model.addAttribute("classes", WebView.getBoardClasses(sessionData.getBoard()));
+        //create new
         model.addAttribute("game_stats", sessionResultsMap.get(sessionData.getSessionID()));
         model.addAttribute("session_data", sessionData);
         return "play";
@@ -145,12 +148,13 @@ public class GameController {
         return "redirect:/";
     }
 
-    private SessionData startSession(String name) throws Exception {
+    private SessionData startSession(String player1) throws Exception {
         int sessionID;
-        sessionID = this.statisticsRepository.startSession(name, player2.getName());
-        this.sessionResultsMap.put(sessionID, new SessionResults(0,0,0,name,player2.getName()));
+        sessionID = this.statisticsRepository.startSession(player1, this.player2.getName());
+        this.sessionResultsMap.put(sessionID, new SessionResults(0,0,0,player1,this.player2.getName()));
+        //add wins and ties to session data
         SessionData sessionData = new SessionData();
-        sessionData.setPlayer1(new HumanPlayer(name));
+        sessionData.setPlayer1(new HumanPlayer(player1));
         sessionData.setPlayer2(this.player2);
         sessionData.setCurrentPlayer(sessionData.getPlayer2());
         sessionData.setBoard(new Board());
@@ -177,6 +181,7 @@ public class GameController {
             }
             model.addAttribute("finish_status", message);
             try {
+                //update sessionData wins and ties
                 sessionResultsMap.put(sessionData.getSessionID(), this.statisticsRepository.getSessionResults(sessionData.getSessionID()));
             } catch (Exception e) {
                 e.printStackTrace();

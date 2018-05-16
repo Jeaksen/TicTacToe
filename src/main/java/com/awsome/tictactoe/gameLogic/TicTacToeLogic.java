@@ -8,24 +8,7 @@ import java.awt.*;
 
 public class TicTacToeLogic {
 
-//    private Board gameBoard;
-//    private IPlayer player1;
-//    private IPlayer player2;
     private IStatisticsRepository statisticsRepository;
-//    private IView view;
-//    private IPlayer currentPlayer;
-
-
-//    public TicTacToeLogic(Board gameBoard, IPlayer player1, IPlayer player2,
-//                          IStatisticsRepository statisticsRepository, IView view) {
-//        this.gameBoard = gameBoard;
-//        this.player1 = player1;
-//        this.player2 = player2;
-//        this.statisticsRepository = statisticsRepository;
-//        this.view = view;
-//        this.currentPlayer = player1;
-//    }
-
 
     public TicTacToeLogic(IStatisticsRepository statisticsRepository) {
         this.statisticsRepository = statisticsRepository;
@@ -72,35 +55,6 @@ public class TicTacToeLogic {
         return GameStatus.Tie;
     }
 
-//    public void runGame(){
-//        IPlayer currentPlayer = player1;
-//        Point chosenPoint;
-//        while (this.getGameStatus() == GameStatus.InProgress){
-//            chosenPoint = currentPlayer.makeMove(this.gameBoard);
-//            if (chosenPoint == null){
-//                this.view.updateView(currentPlayer, gameBoard);
-//                return;
-//            }
-//            while (gameBoard.getBoard()[chosenPoint.x][chosenPoint.y] != FieldStatus.Empty){
-//                this.view.displayMessage("This field is already taken, please retry");
-//                chosenPoint =  currentPlayer.makeMove(this.gameBoard);
-//            }
-//            if (currentPlayer == player1){
-//                FieldStatus chosenField = FieldStatus.TakenByPlayer1;
-//                gameBoard.getBoard()[chosenPoint.x][chosenPoint.y] = chosenField;
-//            } else {
-//                FieldStatus chosenField = FieldStatus.TakenByPlayer2;
-//                gameBoard.getBoard()[chosenPoint.x][chosenPoint.y] = chosenField;
-//            }
-//            if(currentPlayer == player1){
-//                currentPlayer = player2;
-//            } else {
-//                currentPlayer = player1;
-//            }
-//            this.view.updateView(currentPlayer, gameBoard);
-//        }
-//    }
-
     /**
      * This methods calls a methods from IStatisticsRepository to save result when game is finished
      * @throws Exception when there was an error during saving the result
@@ -110,21 +64,11 @@ public class TicTacToeLogic {
     }
 
     /**
-     *
      * @param point X and Y coordinates of field that should be occupied
      * @throws Exception When saving result fails
      */
     public void runStep(Point point, IPlayer currentPlayer, IPlayer player1, IPlayer player2, Board gameBoard, int sessionID) throws Exception {
-
         gameBoard.getBoard()[point.x][point.y] = currentPlayer == player1?FieldStatus.TakenByPlayer1:FieldStatus.TakenByPlayer2;
         if (this.getGameStatus(gameBoard) != GameStatus.InProgress) {this.saveGameResult(gameBoard, sessionID);}
         }
-
-//    public IPlayer getCurrentPlayer() {
-//        return this.currentPlayer;
-//    }
-
-//    public void setCurrentPlayer(IPlayer currentPlayer){
-//        this.currentPlayer = currentPlayer;
-//    }
 }
