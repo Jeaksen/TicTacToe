@@ -1,103 +1,70 @@
+* {
+    font-family: "Comic Sans MS", serif;
+    margin: 0;
+    padding: 0;
+}
+
 html{
     width: 100%;
     height: 100%;
 }
+
 body{
-    background-image: url("https://cms.splendidtable.org/sites/default/files/styles/w2000/public/chocolate-chip-cookie.jpg?itok=WjVT2Nnh");
-    background-repeat: no-repeat;
-    background-position: center;
+    background: url("https://cms.splendidtable.org/sites/default/files/styles/w2000/public/chocolate-chip-cookie.jpg?itok=WjVT2Nnh") no-repeat center;
     background-size: cover;
     color: black;
-    margin: 0;
-    padding: 0;
+    text-align: center;
+}
+
+.login_menu{
+    position: absolute;
+    top: 40vh;
+    left: 39vw;
+    text-align: center;
 }
 
 .login_menu input{
     color: black;
     background: whitesmoke;
+    width: 60%;
+    margin: 16px;
 }
+
+.login_menu .button{
+    color: black;
+    background: whitesmoke;
+    margin: 16px 8px;
+}
+
 
 .login_menu p{
     color: white;
 }
 
-.login_menu{
-    position: absolute;
-    top: 40%;
-    left: 40%;
-    font-family: "Comic Sans MS";
-}
-
 #game_name{
-    font-family: "Comic Sans MS";
     color: whitesmoke;
     padding: 20px;
     position: absolute;
-    top: 26%;
-    left: 37%;
+    top: 25vh;
+    left: 38vw;
 }
 
 #warnings{
     color: springgreen;
-    font-family: "Comic Sans MS";
-    position: absolute;
     font-weight: bold;
-    top: 80%;
-    left: 38%;
+    position: absolute;
+    top: 80vh;
+    left: 30vw;
+    text-align: center;
     font-size: 1.7em;
 }
 
-div{
-    min-height: 120px;
-    min-width: 120px;
-}
-div div{
-    display: inline-block;
-
-}
-
-.x_field{
-    background: aqua;
-}
-
-.o_field{
-    background: red;
-}
-
-.empty_field{
-    background: white;
-}
-
-.wrongField{
-    opacity: 0.7;
-    transition: 2s;
-}
-
-#win_message{
-    color: black;
-}
-
-.board_frame{
-    position: absolute;
-    top: 40%;
-    left: 40%;
-}
-
-.form{
-    position: absolute;
-    top: 20%;
-    left: 35%
-}
-
 .button{
-    margin-top: 15px;
-    margin-right: 15px;
+    margin: 15px;
     padding: 7px;
     background-color: whitesmoke;
     text-decoration-style: solid;
     border-color: black;
     border-image-width: 2px;
-    border-color: black;
-    font-family: "Comic Sans MS";
 }
 

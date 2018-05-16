@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Play</title>
+    <link type="text/css" rel="stylesheet" href="style.css" />
+
     <script
             src="https://code.jquery.com/jquery-3.3.1.js"
             integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
             crossorigin="anonymous">
-
     </script>
-
-    <link type="text/css" rel="stylesheet" href="style.css" />
     <script th:inline="javascript">
         var finish_game = [[${game_finished}]];
         $(document).ready(function () {
@@ -24,18 +23,27 @@
             $('div').removeClass('wrongField');
             if (finish_game !== true) {
                 if (e.className === 'empty_field') {
-                    location.href = '/move?x=' + x + '&y=' + y;
+                    post(x,y);
                 }
                 else {
                     $('#warnings').show(2400);
                     $(e).addClass('wrongField');
                 }
             }
+        };
+        
+        var post = function (x, y) {
+            var form = $('<form></form>');
+            form.attr("method", "post");
+            form.attr("action", "/move");
+            form.append('<input type="hidden" name="x" value="' + x + '" />')
+                .append('<input type=hidden name="y" value="' + y + '" />');
+            $("body").append(form);
+            form.submit();
         }
     </script>
 </head>
 <body>
-
 <span class="board_frame">
     <div>
         <div th:class="${classes[0][0]}" onclick="clickOnField(this, 0, 0);"></div>
@@ -55,9 +63,10 @@
 </span>
 
 <span>
+    <a id="log_out" class="button" href="/log_out">Log out</a>
     <div id="warnings">Wrong&nbsp;field!</div>
     <div id="win_message" th:text="${finish_status}"></div>
-    <a id="restart" href="/first_move">PLAY AGAIN</a>
+    <a id="restart" class="button" href="/first_move">PLAY AGAIN</a>
 </span>
 
 <span class="scores">

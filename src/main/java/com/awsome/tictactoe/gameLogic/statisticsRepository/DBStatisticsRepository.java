@@ -25,7 +25,7 @@ public class DBStatisticsRepository implements IStatisticsRepository {
     }
 
     @Override
-    public void saveResult(GameStatus gameStatus) throws Exception {
+    public void saveResult(GameStatus gameStatus, int sessionID) throws Exception {
         for (int i = 0; i < 2; i++) {
             try {
                 switch (gameStatus) {
@@ -39,7 +39,7 @@ public class DBStatisticsRepository implements IStatisticsRepository {
                         statement = connection.prepareStatement("UPDATE statistics SET wins_pl2 = wins_pl2 + 1 WHERE id=?;");
                         break;
                 }
-                statement.setInt(1, currentSessionID);
+                statement.setInt(1, sessionID);
                 statement.execute();
                 break;
             } catch (SQLException e) {
@@ -49,7 +49,7 @@ public class DBStatisticsRepository implements IStatisticsRepository {
     }
 
     @Override
-    public void startSession(String player1Name, String player2Name) throws Exception {
+    public int startSession(String player1Name, String player2Name) throws Exception {
         int id_pl1,id_pl2;
         for (int i = 0; i < 2; i++) {
             try {
@@ -65,15 +65,16 @@ public class DBStatisticsRepository implements IStatisticsRepository {
             }
         }
         currentSessionID++;
+        return currentSessionID;
     }
 
     @Override
-    public SessionResults getSessionResults(String playerName) throws Exception {
+    public SessionResults getSessionResults(int sessionID) throws Exception {
         int id_pl1, id_pl2;
         for (int i = 0; i < 2; i++) {
             try {
                 statement = connection.prepareStatement("SELECT * FROM statistics WHERE id=?");
-                statement.setInt(1, this.currentSessionID);
+                statement.setInt(1, sessionID);
                 result = statement.executeQuery();
                 while (result.next()) {
                     id_pl1 = result.getInt("player1_id");

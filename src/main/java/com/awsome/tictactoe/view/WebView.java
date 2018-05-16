@@ -8,18 +8,17 @@ import java.awt.*;
 public class WebView implements IView {
 
     private String[][] boardClasses;
-    private String player2FieldValue;
-    private String player1FieldValue;
+    private static String player2FieldValue = "x_field";
+    private static String player1FieldValue = "o_field";
+    private static String EMPTY = "empty_field";
 
-    public WebView() {
-        boardClasses = new String[Board.size][Board.size];
-        this.resetBoard();
-        player1FieldValue = "o_field";
-        player2FieldValue = "x_field";
-    }
-
-    @Override
-    public void updateView(IPlayer currentPlayer, Board board) {
+    /**
+     * Array of boardClasses is used to store CSS class names which are assigned to fields n the website
+     * @param board object which keep the values of fields on the game board
+     * @return Array of Strings with CSS classes names assigned to fields chosen by players
+     */
+    public static String[][] getBoardClasses(Board board) {
+        String [][] boardClasses = new String[Board.size][Board.size];
         for (int i = 0; i < Board.size; i++) {
             for (int j = 0; j < Board.size; j++) {
                 switch (board.getBoard()[i][j]){
@@ -30,7 +29,32 @@ public class WebView implements IView {
                         boardClasses[i][j] = player1FieldValue;
                         break;
                     case Empty:
-                        boardClasses[i][j] = "empty_field";
+                        boardClasses[i][j] = EMPTY;
+                        break;
+                }
+            }
+        }
+        return boardClasses;
+    }
+
+    public WebView() {
+        boardClasses = new String[Board.size][Board.size];
+        this.resetBoard();
+    }
+
+    @Override
+    public void updateView(IPlayer currentPlayer, Board board) {
+        for (int i = 0; i < Board.size; i++) {
+            for (int j = 0; j < Board.size; j++) {
+                switch (board.getBoard()[i][j]){
+                    case TakenByPlayer2:
+                        this.boardClasses[i][j] = player2FieldValue;
+                        break;
+                    case TakenByPlayer1:
+                        this.boardClasses[i][j] = player1FieldValue;
+                        break;
+                    case Empty:
+                        this.boardClasses[i][j] = EMPTY;
                         break;
                 }
             }
@@ -47,17 +71,13 @@ public class WebView implements IView {
 
     }
 
-    public String[][] getBoardClasses(){
-        return boardClasses;
-    }
-
     public void resetBoard(){
         for (int i = 0; i < Board.size; i++) {
             for (int j = 0; j < Board.size; j++) {
                 boardClasses[i][j] = "empty_field";
             }
         }
-        String temp = this.player1FieldValue;
+        String temp = player1FieldValue;
         player1FieldValue = player2FieldValue;
         player2FieldValue = temp;
     }
